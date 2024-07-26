@@ -1553,6 +1553,17 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers,
 /turf/open/floor/engine/n2o,
 /area/station/engineering/atmos)
+"Ph" = (
+/obj/structure/table,
+/obj/item/pipe_dispenser,
+/obj/item/pipe_dispenser{
+	pixel_y = 10
+	},
+/obj/item/pipe_dispenser{
+	pixel_y = 5
+	},
+/turf/open/floor/iron,
+/area/station/command/bridge)
 "Pk" = (
 /obj/structure/cable/layer3,
 /obj/machinery/light/directional/east,
@@ -15539,7 +15550,7 @@ Ir
 Ir
 Ir
 Gv
-Ir
+Ph
 uL
 bZ
 bZ
@@ -23531,8 +23542,8 @@ in
 WK
 Wb
 WK
-in
-jo
+sw
+sw
 in
 in
 DM
@@ -23789,7 +23800,7 @@ in
 in
 in
 in
-in
+sw
 jo
 pv
 VS
