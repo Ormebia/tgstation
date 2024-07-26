@@ -686,6 +686,17 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
+"to" = (
+/obj/structure/table,
+/obj/item/pipe_dispenser,
+/obj/item/pipe_dispenser{
+	pixel_y = 10
+	},
+/obj/item/pipe_dispenser{
+	pixel_y = 5
+	},
+/turf/open/floor/iron,
+/area/station/command/bridge)
 "tv" = (
 /turf/open/floor/engine/antinoblium,
 /area/station/engineering/atmos)
@@ -1553,17 +1564,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers,
 /turf/open/floor/engine/n2o,
 /area/station/engineering/atmos)
-"Ph" = (
-/obj/structure/table,
-/obj/item/pipe_dispenser,
-/obj/item/pipe_dispenser{
-	pixel_y = 10
-	},
-/obj/item/pipe_dispenser{
-	pixel_y = 5
-	},
-/turf/open/floor/iron,
-/area/station/command/bridge)
 "Pk" = (
 /obj/structure/cable/layer3,
 /obj/machinery/light/directional/east,
@@ -1626,6 +1626,10 @@
 "QU" = (
 /turf/open/floor/engine/airless,
 /area/station/engineering/atmos)
+"QX" = (
+/obj/machinery/ntnet_relay,
+/turf/open/floor/iron,
+/area/station/command/bridge)
 "QY" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
@@ -15550,7 +15554,7 @@ Ir
 Ir
 Ir
 Gv
-Ph
+to
 uL
 bZ
 bZ
@@ -18646,7 +18650,7 @@ Ir
 gG
 Ir
 Ir
-Ir
+QX
 uL
 bZ
 bZ
