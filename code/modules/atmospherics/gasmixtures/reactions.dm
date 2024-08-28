@@ -1240,6 +1240,8 @@
 	var/plasma_burn_rate = 0
 	var/list/cached_gases = air.gases //this speeds things up because accessing datum vars is slow
 
+	plasma_burn_rate = (cached_gases[/datum/gas/plasma][MOLES] / PY_PLASMA_BURN_RATE_DELTA) * temperature_scale
+
 	if(plasma_burn_rate < MINIMUM_HEAT_CAPACITY)
 		return NO_REACTION
 
