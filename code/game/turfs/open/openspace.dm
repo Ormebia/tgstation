@@ -208,5 +208,17 @@
 	protect_ruin = FALSE
 	drill_below = FALSE
 
+/turf/open/openspace/icemoon/lavaland
+	name = "hot chasm"
+	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
+
+/turf/open/openspace/icemoon/lavaland/keep_below
+	drill_below = FALSE
+
+/turf/open/openspace/icemoon/lavaland/ruins
+	protect_ruin = FALSE
+	drill_below = FALSE
+
 /turf/open/openspace/telecomms
 	initial_gas_mix = TCOMMS_ATMOS
