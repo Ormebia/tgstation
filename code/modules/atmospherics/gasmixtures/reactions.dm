@@ -1236,7 +1236,7 @@
 		temperature_scale = (temperature - PY_MINIMUM_BURN_TEMPERATURE) / (PY_PLASMA_UPPER_TEMPERATURE-PY_MINIMUM_BURN_TEMPERATURE)
 		if(temperature_scale <= 0)
 			return NO_REACTION
-	var/pyroxium_burn_ratio = PY_BURN_RATIO_BASE - temperature_scale
+	var/pyroxium_burn_ratio = PY_BURN_RATIO_BASE - temperature_scale / 2
 	var/plasma_burn_rate = 0
 	var/list/cached_gases = air.gases //this speeds things up because accessing datum vars is slow
 

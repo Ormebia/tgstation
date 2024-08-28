@@ -150,7 +150,7 @@
 		breath = empty_breath
 
 	// Ensure gas volumes are present.
-	breath.assert_gases(/datum/gas/bz, /datum/gas/carbon_dioxide, /datum/gas/freon, /datum/gas/plasma, /datum/gas/pluoxium, /datum/gas/miasma, /datum/gas/nitrous_oxide, /datum/gas/nitrium, /datum/gas/oxygen)
+	breath.assert_gases(/datum/gas/bz, /datum/gas/carbon_dioxide, /datum/gas/freon, /datum/gas/plasma, /datum/gas/pluoxium, /datum/gas/miasma, /datum/gas/nitrous_oxide, /datum/gas/nitrium, /datum/gas/oxygen, /datum/gas/pyroxium)
 
 	/// The list of gases in the breath.
 	var/list/breath_gases = breath.gases
@@ -177,7 +177,7 @@
 	var/safe_co2_max = 10
 	/// Maximum Plasma before side-effects.
 	var/safe_plas_max = 0.05
-	/// Maximum Pluoxum before side-effects.
+	/// Maximum Pluoxium before side-effects.
 	var/gas_stimulation_min = 0.002 // For Pluoxium
 	// Vars for N2O induced euphoria, stun, and sleep.
 	var/n2o_euphoria = EUPHORIA_LAST_FLAG
@@ -196,6 +196,7 @@
 	var/n2o_pp = 0
 	var/nitrium_pp = 0
 	var/miasma_pp = 0
+	var/pyroxium_pp = 0
 
 	// Check for moles of gas and handle partial pressures / special conditions.
 	if(has_moles)
@@ -211,6 +212,7 @@
 		miasma_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/miasma][MOLES])
 		n2o_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/nitrous_oxide][MOLES])
 		nitrium_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/nitrium][MOLES])
+		pyroxium_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/pyroxium][MOLES])
 
 	// Breath has 0 moles of gas.
 	else if(can_breathe_vacuum)
@@ -384,10 +386,20 @@
 		clear_mood_event("chemical_euphoria")
 	// Activate mood on first flag, remove on second, do nothing on third.
 
+	if (pyroxium_pp)
+		var/need_mob_update = FALSE
+		if (pyroxium_pp > 0.5)
+			need_mob_update += adjustFireLoss(nitrium_pp * 0.25, updating_health = FALSE)
+		if (pyroxium_pp > 8)
+			need_mob_update += adjustFireLoss(nitrium_pp, updating_health = FALSE)
+			adjust_fire_stacks(2)
+			reagents.add_reagent(/datum/reagent/clf3, 4)
+
 	if(has_moles)
 		handle_breath_temperature(breath)
 
 	breath.garbage_collect()
+
 
 /// Applies suffocation side-effects to a given Human, scaling based on ratio of required pressure VS "true" pressure.
 /// If pressure is greater than 0, the return value will represent the amount of gas successfully breathed.

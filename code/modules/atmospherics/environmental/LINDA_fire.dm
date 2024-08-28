@@ -38,6 +38,8 @@
 	var/h2 = . ? .[MOLES] : 0
 	. = air_gases[/datum/gas/freon]
 	var/freon = . ? .[MOLES] : 0
+	. = air_gases[/datum/gas/pyroxium]
+	var/pyro = . ? .[MOLES] : 0
 	if(active_hotspot)
 		if(soh)
 			if(plas > 0.5 || trit > 0.5 || h2 > 0.5)
@@ -53,6 +55,7 @@
 		return
 
 	if(((exposed_temperature > PLASMA_MINIMUM_BURN_TEMPERATURE) && (plas > 0.5 || trit > 0.5 || h2 > 0.5)) || \
+		((exposed_temperature > PY_MINIMUM_BURN_TEMPERATURE) && (pyro > 0.5) && (plas > 0.5 || trit > 0.5 || h2 > 0.5)) || \
 		((exposed_temperature < FREON_MAXIMUM_BURN_TEMPERATURE) && (freon > 0.5)))
 
 		active_hotspot = new /obj/effect/hotspot(src, exposed_volume*25, exposed_temperature)
