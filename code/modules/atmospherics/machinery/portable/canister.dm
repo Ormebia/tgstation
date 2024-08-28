@@ -251,6 +251,13 @@
 	greyscale_config = /datum/greyscale_config/canister/double_stripe
 	greyscale_colors = "#009a00#006600"
 
+/obj/machinery/portable_atmospherics/canister/pyroxium
+	name = "Pyroxium canister"
+	gas_type = /datum/gas/pyroxium
+	filled = 1
+	greyscale_config = /datum/greyscale_config/canister/hazard
+	greyscale_colors = "#00ffff#ff8888"
+
 // Special canisters below here
 
 /obj/machinery/portable_atmospherics/canister/fusion_test

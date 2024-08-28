@@ -207,3 +207,22 @@
 		"Nuclear Particles" = "This reaction emits extremely high energy nuclear particles, up to [2 * PN_BZASE_NUCLEAR_PARTICLE_MAXIMUM] per second per unique gas mixture.",
 		"Temperature" = "Can only occur between [PN_BZASE_MIN_TEMP] - [PN_BZASE_MAX_TEMP] kelvin.",
 	)
+
+/datum/gas_reaction/pyroxium_formation/init_factors()
+	factor = list(
+		/datum/gas/antinoblium = "Antinoblium is consumed at 1 mole per 3 moles of product formed.",
+		/datum/gas/pluoxium = "Pluoxium is consumed at 2 moles per 3 moles product formed.",
+		/datum/gas/pyroxium = "Pyroxium is formed, composing 9/10 of the product.",
+		/datum/gas/tritium = "Tritium is formed, composing 1/10 of the product.",
+		"Energy" = "[PY_FORMATION_ENERGY] joules of energy are released per mole of product formed.",
+		"Temperature" = "Can only occur above [PY_FORMATION_MIN_TEMPERATURE] kelvin.",
+	)
+
+/datum/gas_reaction/pyrox_plasmafire/init_factors()
+	factor = list(
+		/datum/gas/pyroxium = "Pyroxium consumption is determined by the temperature, ranging from [PY_BURN_RATIO_BASE] moles per mole of plasma consumed at [PY_MINIMUM_BURN_TEMPERATURE] Kelvins to [PY_BURN_RATIO_BASE-1] moles per mole of plasma consumed at [PY_PLASMA_UPPER_TEMPERATURE] Kelvins. Higher pyroxium concentration up to [PY_PLASMA_OXYGEN_FULLBURN] times the plasma increases the speed of plasma consumption.",
+		/datum/gas/plasma = "Plasma is consumed at a rate that scales with the difference between the temperature and [PY_MINIMUM_BURN_TEMPERATURE]K, with maximum scaling at [PY_PLASMA_UPPER_TEMPERATURE]K.",
+		/datum/gas/tritium = "Tritium is formed at 1 mole per mole of plasma consumed.",
+		"Temperature" = "Minimum temperature of [PY_MINIMUM_BURN_TEMPERATURE] kelvin to occur. Higher temperature up to [PY_PLASMA_UPPER_TEMPERATURE]K increases the pyroxium efficiency and also the plasma consumption rate.",
+		"Energy" = "[PY_FIRE_PLASMA_ENERGY_RELEASED] joules of energy is released per mole of plasma consumed.",
+	)

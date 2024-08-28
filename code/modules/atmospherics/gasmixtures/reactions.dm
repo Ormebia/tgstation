@@ -1161,4 +1161,110 @@
 		air.temperature = max((temperature * old_heat_capacity + energy_released) / new_heat_capacity, TCMB)
 	return REACTING
 
+/**
+ * Pyroxium formation reaction
+ */
+
+/datum/gas_reaction/pyroxium_formation
+	priority_group = PRIORITY_FORMATION
+	name = "Pyroxium Formation"
+	id = "pyroxium_formation"
+	desc = "Formation of pyroxium from pluoxium and antinoblium. Produces trace amounts of tritium as well."
+
+/datum/gas_reaction/pyroxium_formation/init_reqs()
+	requirements = list(
+		/datum/gas/antinoblium = MINIMUM_MOLE_COUNT,
+		/datum/gas/pluoxium = MINIMUM_MOLE_COUNT,
+		"MIN_TEMP" = PY_FORMATION_MIN_TEMPERATURE
+	)
+
+/datum/gas_reaction/pyroxium_formation/react(datum/gas_mixture/air, datum/holder)
+	var/list/cached_gases = air.gases
+	var/temperature = air.temperature
+
+	/// Bonus to formation speed based on temperature. At T > 10,000 K instantly eats all the reactants to form Pyroxium and Tritium
+	var/temp_bonus = min(temperature/10000, 1)
+
+	var/pyroxium_formed = min(temp_bonus * (cached_gases[/datum/gas/antinoblium][MOLES] * INVERSE(1/3) + cached_gases[/datum/gas/pluoxium][MOLES] * INVERSE(2/3))/3, 0.01 * (cached_gases[/datum/gas/antinoblium][MOLES] * INVERSE(1/3) + cached_gases[/datum/gas/pluoxium][MOLES] * INVERSE(2/3)))
+
+	if (pyroxium_formed <= 0 || (cached_gases[/datum/gas/antinoblium][MOLES] - pyroxium_formed * (1/3) < 0) || (cached_gases[/datum/gas/pluoxium][MOLES] - pyroxium_formed * (2/3) < 0))
+		return NO_REACTION
+
+	var/old_heat_capacity = air.heat_capacity()
+	ASSERT_GAS(/datum/gas/pyroxium, air)
+	ASSERT_GAS(/datum/gas/tritium, air)
+	cached_gases[/datum/gas/antinoblium][MOLES] -= pyroxium_formed * 1/3
+	cached_gases[/datum/gas/pluoxium][MOLES] -= pyroxium_formed * 2/3
+	cached_gases[/datum/gas/pyroxium][MOLES] += pyroxium_formed * (1-INVERSE(PY_FORMATION_TRIT_RATIO))
+	cached_gases[/datum/gas/tritium][MOLES] += pyroxium_formed * INVERSE(PY_FORMATION_TRIT_RATIO)
+
+	SET_REACTION_RESULTS(pyroxium_formed)
+
+	var/energy_released = pyroxium_formed * PY_FORMATION_ENERGY
+	var/new_heat_capacity = air.heat_capacity()
+	if(new_heat_capacity > MINIMUM_HEAT_CAPACITY)
+		air.temperature = max(((air.temperature * old_heat_capacity + energy_released) / new_heat_capacity), TCMB)
+	return REACTING
+
+
+/**
+ * Pyroxium burn reactions
+ *
+ * Mostly copypasta'd from the normal burn reactions, though the numbers are fudged.
+ */
+/datum/gas_reaction/pyrox_plasmafire
+	priority_group = PRIORITY_FIRE
+	name = "Pyroxium Plasma Combustion"
+	id = "pyroxium_plasmafire"
+	expands_hotspot = TRUE
+	desc = "Combustion of pyroxium and plasma. Burns hot and produces tritium."
+
+/datum/gas_reaction/pyrox_plasmafire/init_reqs()
+	requirements = list(
+		/datum/gas/plasma = MINIMUM_MOLE_COUNT,
+		/datum/gas/pyroxium = MINIMUM_MOLE_COUNT,
+		"MIN_TEMP" = PY_MINIMUM_BURN_TEMPERATURE,
+	)
+
+/datum/gas_reaction/pyrox_plasmafire/react(datum/gas_mixture/air, datum/holder)
+	// This reaction should proceed faster at higher temperatures.
+	var/temperature = air.temperature
+	var/temperature_scale = 0
+	if(temperature > PY_PLASMA_UPPER_TEMPERATURE)
+		temperature_scale = 1
+	else
+		temperature_scale = (temperature - PY_MINIMUM_BURN_TEMPERATURE) / (PY_PLASMA_UPPER_TEMPERATURE-PY_MINIMUM_BURN_TEMPERATURE)
+		if(temperature_scale <= 0)
+			return NO_REACTION
+	var/pyroxium_burn_ratio = PY_BURN_RATIO_BASE - temperature_scale
+	var/plasma_burn_rate = 0
+	var/list/cached_gases = air.gases //this speeds things up because accessing datum vars is slow
+
+	if(plasma_burn_rate < MINIMUM_HEAT_CAPACITY)
+		return NO_REACTION
+
+	var/old_heat_capacity = air.heat_capacity()
+	plasma_burn_rate = min(plasma_burn_rate, cached_gases[/datum/gas/plasma][MOLES], cached_gases[/datum/gas/pyroxium][MOLES] *  INVERSE(pyroxium_burn_ratio)) //Ensures matter is conserved properly
+	cached_gases[/datum/gas/plasma][MOLES] = QUANTIZE(cached_gases[/datum/gas/plasma][MOLES] - plasma_burn_rate)
+	cached_gases[/datum/gas/pyroxium][MOLES] = QUANTIZE(cached_gases[/datum/gas/oxygen][MOLES] - (plasma_burn_rate * pyroxium_burn_ratio))
+
+	//Creates tritium no matter what
+	ASSERT_GAS(/datum/gas/tritium, air)
+	cached_gases[/datum/gas/tritium][MOLES] += plasma_burn_rate
+
+	SET_REACTION_RESULTS((plasma_burn_rate) * (1 + pyroxium_burn_ratio))
+	var/energy_released = PY_FIRE_PLASMA_ENERGY_RELEASED * plasma_burn_rate
+	var/new_heat_capacity = air.heat_capacity()
+	if(new_heat_capacity > MINIMUM_HEAT_CAPACITY)
+		air.temperature = (temperature * old_heat_capacity + energy_released) / new_heat_capacity
+
+	// Let the floor know a fire is happening
+	var/turf/open/location = holder
+	if(istype(location))
+		temperature = air.temperature
+		if(temperature > FIRE_MINIMUM_TEMPERATURE_TO_EXIST)
+			location.hotspot_expose(temperature, CELL_VOLUME)
+
+	return REACTING
+
 #undef SET_REACTION_RESULTS

@@ -305,6 +305,22 @@
 	desc = "We still don't know what it does, but it sells for a lot."
 	primary_color = COLOR_MAROON
 
+/datum/gas/pyroxium
+	id = GAS_PYROXIUM
+	specific_heat = 2
+	name = "Pyroxium"
+	//Overlay's currently just plasma hueshifted cyan and brightened
+	gas_overlay = "pyroxium"
+	moles_visible = MOLES_GAS_VISIBLE
+	//Dear god is it.
+	dangerous = TRUE
+	fusion_power = 15
+	rarity = 50
+	purchaseable = FALSE
+	base_value = 7
+	desc = "A very angry and hypergolic gas, formerly used in rocketry. Warranty void if exposed to matter."
+	primary_color = "#7cffff"
+
 /obj/effect/overlay/gas
 	icon = 'icons/effects/atmospherics.dmi'
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT

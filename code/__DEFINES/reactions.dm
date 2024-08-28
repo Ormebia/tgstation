@@ -261,3 +261,25 @@
 #define PN_BZASE_NUCLEAR_PARTICLE_MAXIMUM 6
 /// How much radiation in consumed amount does a nuclear particle take from radiation when proto-nitrate breaks down BZ.
 #define PN_BZASE_NUCLEAR_PARTICLE_RADIATION_ENERGY_CONVERSION 2.5
+
+// Pyroxium:
+/// The minimum temperature for pyroxium to form.
+#define PY_FORMATION_MIN_TEMPERATURE 40
+/// The ratio of pyroxium to tritium formed.
+#define PY_FORMATION_TRIT_RATIO 10
+/// The amount of energy pyroxium produces per mole formed.
+#define PY_FORMATION_ENERGY 200
+
+// The following is mostly copied from the plasma section
+/// The minimum temperature for Pyroxium to combust with fuel.
+#define PY_MINIMUM_BURN_TEMPERATURE 50
+/// Upper temperature ceiling for pyroxium plasmafire reaction calculations for fuel consumption
+#define PY_PLASMA_UPPER_TEMPERATURE (PY_MINIMUM_BURN_TEMPERATURE + 2540)
+/// The maximum and default amount of plasma consumed as pyroxium per mole of plasma burnt.
+#define PY_BURN_RATIO_BASE 2.8
+/// Multiplier for plasmafire with pyroxium moles * PLASMA_OXYGEN_FULLBURN for the maximum fuel consumption
+#define PY_PLASMA_OXYGEN_FULLBURN 10
+/// The divisor for the maximum plasma burn rate. (1/9 of the plasma can burn in one reaction tick.)
+#define PY_PLASMA_BURN_RATE_DELTA 4.5
+/// Energy released in a pyroxium plasmafire.
+#define PY_FIRE_PLASMA_ENERGY_RELEASED 6e6
