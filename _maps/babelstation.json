@@ -1,0 +1,49 @@
+{
+	"version" : 1,
+	"map_name" : "Babelstation",
+	"map_path" : "map_files/BabelStation",
+	"map_file" : "babelstation.dmm",
+	"space_ruin_levels" : 0,
+	"space_empty_levels" : 0,
+	"planetary" : 1,
+	"shuttles" : {
+		"cargo" : "cargo_box",
+		"ferry" : "ferry_fancy",
+		"whiteship" : "whiteship_box",
+		"emergency" : "emergency_box"
+	},
+	"traits" : [
+		{
+			"Up" : true,
+			"Mining" : true,
+			"Linkage" : null,
+			"Gravity" : true,
+			"Lava Ruins" : true,
+			"Baseturf" : "turf/open/lava/smooth/lava_land_surface",
+			"No Parallax" : true
+		},
+		{
+			"Down" : true,
+			"Up" : true,
+			"Linkage" : null,
+			"Gravity" : true,
+			"Baseturf" : "turf/open/openspace/icemoon/lavaland/keep_below",
+			"No Parallax" : true
+		},
+		{
+			"Down" : true,
+			"Up" : true,
+			"Linkage" : null,
+			"Gravity" : true,
+			"Baseturf" : "turf/open/openspace/icemoon/lavaland/keep_below",
+			"No Parallax" : true
+		}
+	],
+	"minetype" : "none",
+	"blacklist_file" : "lavaruinblacklist.txt",
+	"job_changes" : {
+		"Captain" : {
+			"special_charter" : "moon"
+		}
+	}
+}

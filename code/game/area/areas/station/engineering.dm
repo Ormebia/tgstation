@@ -62,6 +62,10 @@
 	name = "\improper Atmospherics HFR Room"
 	icon_state = "atmos_HFR"
 
+/area/station/engineering/atmos/gas_mining
+	name = "\improper Atmospherics Gas Mining"
+	icon_state = "atmos_mine"
+
 /area/station/engineering/atmospherics_engine
 	name = "\improper Atmospherics Engine"
 	icon_state = "atmos_engine"
