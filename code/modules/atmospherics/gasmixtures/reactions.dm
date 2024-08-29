@@ -1269,4 +1269,103 @@
 
 	return REACTING
 
+/datum/gas_reaction/pyrox_h2fire
+	priority_group = PRIORITY_FIRE
+	name = "Pyroxium Hydrogen Combustion"
+	id = "pyroxium_h2fire"
+	expands_hotspot = TRUE
+	desc = "Combustion of hydrogen with pyroxium. Probably a good time to get some running shoes on."
+
+/datum/gas_reaction/pyrox_h2fire/init_reqs()
+	requirements = list(
+		/datum/gas/hydrogen = MINIMUM_MOLE_COUNT,
+		/datum/gas/pyroxium = MINIMUM_MOLE_COUNT,
+		"MIN_TEMP" = PY_MINIMUM_BURN_TEMPERATURE,
+	)
+
+/datum/gas_reaction/pyrox_h2fire/react(datum/gas_mixture/air, datum/holder)
+	var/list/cached_gases = air.gases
+	var/old_heat_capacity = air.heat_capacity()
+	var/temperature = air.temperature
+
+	var/burned_fuel = min(cached_gases[/datum/gas/hydrogen][MOLES] /		PY_FIRE_HYDROGEN_BURN_RATE_DELTA, cached_gases[/datum/gas/pyroxium][MOLES] / (PY_FIRE_HYDROGEN_BURN_RATE_DELTA * PY_HYDROGEN_OXYGEN_FULLBURN), cached_gases[/datum/gas/hydrogen][MOLES], cached_gases[/datum/gas/pyroxium][MOLES] * INVERSE(0.25))
+	if(burned_fuel <= 0 || cached_gases[/datum/gas/hydrogen][MOLES] - burned_fuel < 0 || cached_gases[/datum/gas/pyroxium] / burned_fuel * 0.25 < 0)
+		return NO_REACTION
+
+	cached_gases[/datum/gas/hydrogen][MOLES] -= burned_fuel
+	cached_gases[/datum/gas/pyroxium][MOLES] -= burned_fuel * 0.25
+	ASSERT_GAS(/datum/gas/water_vapor, air)
+	cached_gases[/datum/gas/water_vapor][MOLES] += burned_fuel
+
+	SET_REACTION_RESULTS(burned_fuel)
+
+	var/energy_released = PY_FIRE_HYDROGEN_ENERGY_RELEASED * burned_fuel
+	if(energy_released > 0)
+		var/new_heat_capacity = air.heat_capacity()
+		if(new_heat_capacity > MINIMUM_HEAT_CAPACITY)
+			air.temperature = (temperature * old_heat_capacity + energy_released) / new_heat_capacity
+
+	//let the floor know a fire is happening
+	var/turf/open/location = holder
+	if(istype(location))
+		temperature = air.temperature
+		if(temperature > PY_MINIMUM_BURN_TEMPERATURE)
+			location.hotspot_expose(temperature, CELL_VOLUME)
+
+	return burned_fuel ? REACTING : NO_REACTION
+
+/datum/gas_reaction/pyrox_tritfire
+	priority_group = PRIORITY_FIRE
+	name = "Pyroxium Tritium Combustion"
+	id = "pyroxium_tritfire"
+	expands_hotspot = TRUE
+	desc = "Combustion of Pyroxium and Tritium. Probably shouldn't get too close to this."
+
+/datum/gas_reaction/pyrox_tritfire/init_reqs()
+	requirements = list(
+		/datum/gas/tritium = MINIMUM_MOLE_COUNT,
+		/datum/gas/pyroxium = MINIMUM_MOLE_COUNT,
+		"MIN_TEMP" = PY_MINIMUM_BURN_TEMPERATURE,
+	)
+
+/datum/gas_reaction/pyrox_tritfire/react(datum/gas_mixture/air, datum/holder)
+	var/list/cached_gases = air.gases
+	var/old_heat_capacity = air.heat_capacity()
+	var/temperature = air.temperature
+
+	var/burned_fuel = min(cached_gases[/datum/gas/tritium][MOLES] / PY_FIRE_HYDROGEN_BURN_RATE_DELTA, cached_gases[/datum/gas/pyroxium][MOLES] / (PY_FIRE_HYDROGEN_BURN_RATE_DELTA * PY_HYDROGEN_OXYGEN_FULLBURN), cached_gases[/datum/gas/tritium][MOLES], cached_gases[/datum/gas/pyroxium] * INVERSE(0.25))
+	if(burned_fuel <= 0 || cached_gases[/datum/gas/tritium][MOLES] - burned_fuel < 0 || cached_gases[/datum/gas/oxygen][MOLES] - burned_fuel * 0.25 < 0)
+		return NO_REACTION
+
+	cached_gases[/datum/gas/tritium][MOLES] -= burned_fuel
+	cached_gases[/datum/gas/pyroxium][MOLES] -= burned_fuel * 0.25
+	ASSERT_GAS(/datum/gas/water_vapor, air)
+	cached_gases[/datum/gas/water_vapor][MOLES] += burned_fuel
+
+	SET_REACTION_RESULTS(burned_fuel)
+
+	var/turf/open/location
+	if(istype(holder, /datum/pipeline))
+		var/datum/pipeline/pipenet = holder
+		location = pick(pipenet.members)
+	else if(isatom(holder))
+		location = holder
+
+	var/energy_released = FIRE_TRITIUM_ENERGY_RELEASED * burned_fuel
+	if(location && burned_fuel > TRITIUM_RADIATION_MINIMUM_MOLES && energy_released > TRITIUM_RADIATION_RELEASE_THRESHOLD * (air.volume / CELL_VOLUME) ** ATMOS_RADIATION_VOLUME_EXP && prob(10))
+		radiation_pulse(location, max_range = min(sqrt(burned_fuel) / TRITIUM_RADIATION_RANGE_DIVISOR, GAS_REACTION_MAXIMUM_RADIATION_PULSE_RANGE), threshold = TRITIUM_RADIATION_THRESHOLD)
+
+	if(energy_released > 0)
+		var/new_heat_capacity = air.heat_capacity()
+		if(new_heat_capacity > MINIMUM_HEAT_CAPACITY)
+			air.temperature = (temperature * old_heat_capacity + energy_released) / new_heat_capacity
+
+	//let the floor know a fire is happening
+	if(istype(location))
+		temperature = air.temperature
+		if(temperature > PY_MINIMUM_BURN_TEMPERATURE)
+			location.hotspot_expose(temperature, CELL_VOLUME)
+
+	return burned_fuel ? REACTING : NO_REACTION
+
 #undef SET_REACTION_RESULTS

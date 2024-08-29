@@ -391,9 +391,10 @@
 		if (pyroxium_pp > 0.5)
 			need_mob_update += adjustFireLoss(nitrium_pp * 0.25, updating_health = FALSE)
 		if (pyroxium_pp > 8)
-			need_mob_update += adjustFireLoss(nitrium_pp, updating_health = FALSE)
 			adjust_fire_stacks(2)
 			reagents.add_reagent(/datum/reagent/clf3, 4)
+		if(need_mob_update)
+			updatehealth()
 
 	if(has_moles)
 		handle_breath_temperature(breath)

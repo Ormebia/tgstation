@@ -276,10 +276,18 @@
 /// Upper temperature ceiling for pyroxium plasmafire reaction calculations for fuel consumption
 #define PY_PLASMA_UPPER_TEMPERATURE (PY_MINIMUM_BURN_TEMPERATURE + 2540)
 /// The maximum and default amount of plasma consumed as pyroxium per mole of plasma burnt.
-#define PY_BURN_RATIO_BASE 2.8
+#define PY_BURN_RATIO_BASE 0.7
 /// Multiplier for plasmafire with pyroxium moles * PLASMA_OXYGEN_FULLBURN for the maximum fuel consumption
 #define PY_PLASMA_OXYGEN_FULLBURN 10
 /// The divisor for the maximum plasma burn rate. (1/9 of the plasma can burn in one reaction tick.)
 #define PY_PLASMA_BURN_RATE_DELTA 4.5
 /// Energy released in a pyroxium plasmafire.
 #define PY_FIRE_PLASMA_ENERGY_RELEASED 6e6
+
+// Pyroxium Hydrogen constants
+/// The amount of energy released by burning one mole of hydrogen
+#define PY_FIRE_HYDROGEN_ENERGY_RELEASED 5.6e6
+/// Multiplier for hydrogen fire with pyroxium moles * HYDROGEN_OXYGEN_FULLBURN for the maximum fuel consumption
+#define PY_HYDROGEN_OXYGEN_FULLBURN 10
+/// The divisor for the maximum hydrogen burn rate. (1/2 of the hydrogen can burn in one raction tick.)
+#define PY_FIRE_HYDROGEN_BURN_RATE_DELTA 2
