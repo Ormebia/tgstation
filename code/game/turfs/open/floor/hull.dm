@@ -6,6 +6,9 @@
 	initial_gas_mix = AIRLESS_ATMOS
 	temperature = TCMB
 
+/turf/open/floor/engine/hull/lavaland_atmos
+	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+
 /turf/open/floor/engine/hull/ceiling
 	name = "shuttle ceiling plating"
 	var/old_turf_type
@@ -29,3 +32,6 @@
 	desc = "Extremely sturdy exterior hull plating that separates you from the uncaring vacuum of space."
 	icon_state = "reinforced_hull"
 	heat_capacity = INFINITY
+
+/turf/open/floor/engine/hull/reinforced/lavaland_atmos
+	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
