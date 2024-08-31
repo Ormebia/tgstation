@@ -92,9 +92,6 @@
 /obj/item/radio/intercom/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/ce)
-"be" = (
-/turf/open/openspace/icemoon/lavaland/keep_below,
-/area/lavaland/surface/outdoors/unexplored)
 "bg" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/yellow{
@@ -138,9 +135,6 @@
 /obj/machinery/atmospherics/pipe/layer_manifold/cyan/visible,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
-"by" = (
-/turf/closed/wall/r_wall,
-/area/lavaland/surface/outdoors/unexplored/danger)
 "bE" = (
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
 /obj/machinery/power/apc/auto_name/directional/east,
@@ -194,10 +188,10 @@
 /obj/machinery/light/directional/west,
 /obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/tlv_no_checks,
+/obj/effect/mapping_helpers/airalarm/engine_access,
 /obj/effect/mapping_helpers/airalarm/link{
 	chamber_id = "engine"
 	},
-/obj/effect/mapping_helpers/airalarm/engine_access,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
 "cg" = (
@@ -319,7 +313,7 @@
 /obj/machinery/atmospherics/components/binary/pump{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible,
+/obj/machinery/atmospherics/pipe/bridge_pipe/scrubbers,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "di" = (
@@ -474,7 +468,7 @@
 /obj/machinery/atmospherics/components/binary/pump/on/layer4{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible,
+/obj/machinery/atmospherics/pipe/bridge_pipe/scrubbers,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "eK" = (
@@ -1873,9 +1867,6 @@
 /area/station/tcommsat/server)
 "vn" = (
 /obj/machinery/air_sensor/engine_chamber,
-/obj/effect/mapping_helpers/airalarm/link{
-	chamber_id = "engine"
-	},
 /turf/open/floor/engine,
 /area/station/engineering/supermatter)
 "vp" = (
@@ -3419,7 +3410,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/cyan/visible/layer4{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible,
+/obj/machinery/atmospherics/pipe/bridge_pipe/scrubbers,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "Lq" = (
@@ -4122,7 +4113,7 @@
 /area/station/engineering/lobby)
 "Tr" = (
 /obj/structure/stairs/north,
-/turf/open/openspace,
+/turf/open/floor/iron,
 /area/station/engineering/hallway)
 "Tv" = (
 /obj/effect/landmark/start/atmospheric_technician,
@@ -52227,11 +52218,11 @@ Pl
 Pl
 Pl
 Pl
-by
-by
-by
-by
-by
+Pl
+Pl
+Pl
+Pl
+Pl
 Pl
 Pl
 Pl
@@ -183680,7 +183671,7 @@ nl
 nl
 nl
 nl
-be
+nl
 "}
 (187,1,3) = {"
 nl
@@ -183937,7 +183928,7 @@ nl
 nl
 nl
 nl
-be
+nl
 "}
 (188,1,3) = {"
 nl
