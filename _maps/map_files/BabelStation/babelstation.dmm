@@ -1873,6 +1873,9 @@
 /area/station/tcommsat/server)
 "vn" = (
 /obj/machinery/air_sensor/engine_chamber,
+/obj/effect/mapping_helpers/airalarm/link{
+	chamber_id = "engine"
+	},
 /turf/open/floor/engine,
 /area/station/engineering/supermatter)
 "vp" = (
