@@ -6,7 +6,7 @@
 "ag" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/area/lavaland/surface/outdoors/explored)
 "ai" = (
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Maintenance Hatch"
@@ -62,7 +62,7 @@
 "aH" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/lavaland/surface/outdoors/unexplored)
+/area/lavaland/surface/outdoors/explored)
 "aJ" = (
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron,
@@ -185,13 +185,12 @@
 "cf" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
-/obj/machinery/light/directional/west,
-/obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/tlv_no_checks,
 /obj/effect/mapping_helpers/airalarm/engine_access,
 /obj/effect/mapping_helpers/airalarm/link{
 	chamber_id = "engine"
 	},
+/obj/machinery/airalarm/directional/west,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
 "cg" = (
@@ -290,10 +289,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
-"cV" = (
-/obj/machinery/air_sensor/engine_chamber,
-/turf/closed/wall/r_wall,
-/area/station/engineering)
 "dc" = (
 /obj/machinery/atmospherics/components/binary/pump{
 	dir = 8
@@ -689,7 +684,7 @@
 	name = "Planetary Access"
 	},
 /turf/open/floor/plating,
-/area/lavaland/surface/outdoors/unexplored)
+/area/station/maintenance/starboard)
 "he" = (
 /obj/machinery/atmospherics/pipe/multiz{
 	dir = 8
@@ -1395,6 +1390,10 @@
 /obj/machinery/atmospherics/pipe/smart/simple/dark/visible{
 	dir = 4
 	},
+/obj/machinery/air_sensor/incinerator_tank{
+	chamber_id = "incinerator_2";
+	name = "incinerator chamber 2 gas sensor"
+	},
 /turf/open/floor/engine/airless,
 /area/station/engineering/atmospherics_engine)
 "pI" = (
@@ -2098,9 +2097,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/engineering/atmospherics_engine)
-"xu" = (
-/turf/closed/wall/r_wall,
-/area/lavaland/surface/outdoors/unexplored)
 "xv" = (
 /obj/item/radio/intercom/directional/east,
 /turf/open/floor/iron,
@@ -2576,6 +2572,9 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark/corner,
 /area/station/engineering/lobby)
+"Cp" = (
+/turf/closed/mineral/random/volcanic,
+/area/lavaland/surface/outdoors/explored)
 "Cx" = (
 /obj/machinery/atmospherics/pipe/smart/simple/orange/visible{
 	dir = 10
@@ -2628,9 +2627,6 @@
 /obj/structure/ladder,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
-"CS" = (
-/turf/open/floor/plating,
-/area/lavaland/surface/outdoors/unexplored)
 "CX" = (
 /obj/machinery/airalarm/directional/north,
 /turf/open/floor/iron,
@@ -4163,7 +4159,7 @@
 	name = "Planetary Access"
 	},
 /turf/open/floor/plating,
-/area/lavaland/surface/outdoors/unexplored)
+/area/station/maintenance/starboard)
 "TI" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 4
@@ -4253,6 +4249,10 @@
 /obj/machinery/atmospherics/pipe/smart/simple/brown/visible/layer2{
 	dir = 1
 	},
+/obj/machinery/air_sensor/incinerator_tank{
+	chamber_id = "incinerator_1";
+	name = "incinerator chamber 1 gas sensor"
+	},
 /turf/open/floor/engine/airless,
 /area/station/engineering/atmospherics_engine)
 "UA" = (
@@ -4340,11 +4340,8 @@
 /turf/open/floor/engine/plasma,
 /area/station/engineering/atmos)
 "VV" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/green/visible,
-/obj/machinery/light/directional/west,
-/turf/open/floor/engine,
-/area/station/engineering/supermatter/room)
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors/explored)
 "Wd" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/brown/visible/layer2{
 	dir = 8
@@ -4499,9 +4496,8 @@
 /turf/open/floor/engine/airless,
 /area/station/engineering/atmospherics_engine)
 "XF" = (
-/obj/structure/ladder,
-/turf/open/floor/plating,
-/area/lavaland/surface/outdoors/unexplored)
+/turf/closed/mineral/random/volcanic,
+/area/station/maintenance/starboard)
 "XG" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 8
@@ -4650,7 +4646,7 @@
 "Zl" = (
 /obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/plating,
-/area/lavaland/surface/outdoors/unexplored)
+/area/station/maintenance/starboard)
 "Zr" = (
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
@@ -53556,11 +53552,11 @@ Pl
 Pl
 Pl
 Pl
-os
-os
-os
-os
-os
+VV
+VV
+VV
+VV
+VV
 Pl
 Pl
 Pl
@@ -53812,13 +53808,13 @@ Pl
 Pl
 Pl
 Pl
-os
-os
-os
-os
-os
-os
-os
+VV
+VV
+VV
+VV
+VV
+VV
+VV
 Pl
 Pl
 Pl
@@ -54069,13 +54065,13 @@ Pl
 Pl
 Pl
 Pl
-os
-os
-os
-os
-os
-os
-os
+VV
+VV
+VV
+VV
+VV
+VV
+VV
 Pl
 Pl
 Pl
@@ -54327,12 +54323,12 @@ Pl
 Pl
 Pl
 Pl
-os
-os
-os
-os
-os
-os
+VV
+VV
+VV
+VV
+VV
+VV
 Pl
 Pl
 Pl
@@ -54584,11 +54580,11 @@ Pl
 Pl
 Pl
 Pl
-os
-os
-os
-os
-os
+VV
+VV
+VV
+VV
+VV
 Pl
 Pl
 Pl
@@ -56111,15 +56107,15 @@ Oh
 Oh
 Oh
 Oh
-Oh
-Oh
-Oh
-Oh
-Oh
-Oh
-Oh
-Oh
-Oh
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
 Oh
 Oh
 Oh
@@ -56363,26 +56359,26 @@ Oh
 Oh
 Oh
 Oh
-xu
-xu
-xu
-Oh
-Oh
-Oh
-os
-os
-os
-os
-os
-os
-os
-Oh
-Oh
-Oh
-Oh
-Oh
-Oh
-Oh
+xJ
+xJ
+xJ
+Cp
+Cp
+Cp
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
 zV
 RR
 zV
@@ -56620,26 +56616,26 @@ Oh
 Oh
 Oh
 Oh
-xu
-CS
+xJ
+zf
 Zl
 ag
-os
-os
-os
-os
-os
-os
-os
-os
-os
-Oh
-Oh
-Oh
-Oh
-Oh
-Oh
-Oh
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
 zV
 ej
 zV
@@ -56877,26 +56873,26 @@ Oh
 Oh
 Oh
 Oh
-xu
-XF
+xJ
+ab
 ha
 ha
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
 zV
 RR
 zV
@@ -57134,29 +57130,29 @@ Oh
 Oh
 Oh
 Oh
-xu
-CS
+xJ
+zf
 Zl
 aH
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-Oh
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+Cp
 Oh
 Oh
 Oh
@@ -57391,29 +57387,29 @@ Oh
 Oh
 Oh
 Oh
-xu
+xJ
 TH
-xu
-Oh
-Oh
-Oh
-Oh
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-os
-Oh
-Oh
-Oh
+xJ
+Cp
+Cp
+Cp
+Cp
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+VV
+Cp
+Cp
+Cp
 Oh
 Oh
 Oh
@@ -57648,27 +57644,27 @@ FB
 Oh
 Oh
 Oh
-Oh
-CS
-Oh
-Oh
-Oh
-Oh
-Oh
-os
-os
-os
-os
-os
-os
+XF
+zf
+XF
 Oh
 Oh
 Oh
-Oh
-Oh
-Oh
-Oh
-Oh
+Cp
+VV
+VV
+VV
+VV
+VV
+VV
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
 Oh
 Oh
 Oh
@@ -57907,7 +57903,7 @@ FB
 FB
 FB
 TH
-Oh
+XF
 Oh
 Oh
 Oh
@@ -116261,7 +116257,7 @@ ch
 ch
 cf
 Yl
-VV
+KO
 vV
 KO
 pI
@@ -117535,7 +117531,7 @@ tq
 tq
 tq
 jI
-cV
+SR
 Qm
 np
 np
